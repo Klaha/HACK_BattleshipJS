@@ -262,6 +262,52 @@ function hackJugador2(arr)
   return arr;
 }
 
+function startGame(jugador1, jugador2)
+{
+  var ataquex = 0;
+  var ataquey = 0;
+  var i = 0;
+  var a;
+  var b;
+
+  do
+  {
+    a = prompt('Jugador1, indique posicion a atacar (X:Y)').toLowerCase();
+    ataquex = parseInt(a[2], 10);
+    ataquey = parseInt(a[0], 10);
+
+    if (jugador2[ataquex][ataquey] != '*')
+    {
+      alert('HIT');
+      jugador1[ataquex][ataquey] = 'X';
+      jugador2[ataquex][ataquey] = '@';
+    }
+    else
+    {
+      alert('MISS');
+      jugador1[ataquex][ataquey] = 'F';
+    }
+    hackPrintMatriz(jugador1);
+
+    b = prompt('Jugador2, indique posicion a atacar (X:Y)').toLowerCase();
+    ataquex = parseInt(b[2], 10);
+    ataquey = parseInt(b[0], 10);
+
+    if (jugador1[ataquex][ataquey] != '*')
+    {
+      alert('HIT');
+      jugador2[ataquex][ataquey] = 'X';
+      jugador1[ataquex][ataquey] = '@';
+    }
+    else
+    {
+      alert('MISS');
+      jugador2[ataquex][ataquey] = 'F';
+    }
+    hackPrintMatriz(jugador2);
+  }while(i < 3);
+}
+
 function main()
 {
   do
@@ -275,6 +321,7 @@ function main()
   hackPrintMatriz(player1);
   var player2 = hackJugador2(mat2);
   hackPrintMatriz(player2);
+  startGame(player1,player2);
 }
 
 main();
