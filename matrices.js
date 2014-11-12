@@ -1,6 +1,24 @@
 var i = 0;
 var j = 0;
 var dim = 0;
+t1 = [1,1,1,1];
+t2 = [2,2,2];
+t3 = [3,3];
+var t1p1 = [1,1,1,1];
+var t2p1 = [2,2,2];
+var t3p1 = [3,3];
+var t1p2 = [1,1,1,1];
+var t2p2 = [2,2,2];
+var t3p2 = [3,3];
+
+var t1p1sink = false;
+var t2p1sink = false;
+var t3p1sink = false;
+var t1p2sink = false;
+var t2p2sink = false;
+var t3p2sink = false;
+var t1allsink = false;
+var t2allsink = false;
 
 function hackInitMatriz(dimension)
 {
@@ -52,9 +70,6 @@ function hackJugador1(arr)
   var x = 0;
   var y = 0;
   var z = 0;
-  var t1 = [1,1,1,1];
-  var t2 = [2,2,2];
-  var t3 = [3,3];
   var t1pos = "";
   var t2pos = "";
   var t3pos = "";
@@ -163,9 +178,6 @@ function hackJugador2(arr)
   var x = 0;
   var y = 0;
   var z = 0;
-  var t1 = [1,1,1,1];
-  var t2 = [2,2,2];
-  var t3 = [3,3];
   var t1pos = "";
   var t2pos = "";
   var t3pos = "";
@@ -278,14 +290,51 @@ function startGame(jugador1, jugador2)
 
     if (jugador2[ataquex][ataquey] != '*')
     {
-      alert('HIT');
-      jugador1[ataquex][ataquey] = 'X';
-      jugador2[ataquex][ataquey] = '@';
+      if(jugador2[ataquex][ataquey] == 1)
+      {
+        alert('HIT');
+        jugador1[ataquex][ataquey] = 'X';
+        jugador2[ataquex][ataquey] = '@';
+        t1p1.pop();
+        if (t1p1.length < 1 )
+        {
+          t1p1sink = true;
+        }
+      }
+      if(jugador2[ataquex][ataquey] == 2)
+      {
+        alert('HIT');
+        jugador1[ataquex][ataquey] = 'X';
+        jugador2[ataquex][ataquey] = '@';
+        t2p1.pop();
+        if (t2p1.length < 1 )
+        {
+          t2p1sink = true;
+        }
+      }
+      if(jugador2[ataquex][ataquey] == 3)
+      {
+        alert('HIT');
+        jugador1[ataquex][ataquey] = 'X';
+        jugador2[ataquex][ataquey] = '@';
+        t3p1.pop();
+        if (t3p1.length < 1 )
+        {
+          t3p1sink = true;
+        }
+      }
     }
     else
     {
       alert('MISS');
       jugador1[ataquex][ataquey] = 'F';
+    }
+    
+    if (t1p1sink === true && t2p1sink === true && t3p1sink === true)
+    {
+      t1allsink = true;
+      alert('Player1 GANADOR');
+      break;
     }
     hackPrintMatriz(jugador1);
 
@@ -295,9 +344,39 @@ function startGame(jugador1, jugador2)
 
     if (jugador1[ataquex][ataquey] != '*')
     {
-      alert('HIT');
-      jugador2[ataquex][ataquey] = 'X';
-      jugador1[ataquex][ataquey] = '@';
+      if(jugador1[ataquex][ataquey] == 1)
+      {
+        alert('HIT');
+        jugador2[ataquex][ataquey] = 'X';
+        jugador1[ataquex][ataquey] = '@';
+        t1p2.pop();
+        if (t1p2.length < 1 )
+        {
+          t1p2sink = true;
+        }
+      }
+      if(jugador1[ataquex][ataquey] == 2)
+      {
+        alert('HIT');
+        jugador2[ataquex][ataquey] = 'X';
+        jugador1[ataquex][ataquey] = '@';
+        t2p2.pop();
+        if (t2p2.length < 1 )
+        {
+          t2p2sink = true;
+        }
+      }
+      if(jugador1[ataquex][ataquey] == 3)
+      {
+        alert('HIT');
+        jugador2[ataquex][ataquey] = 'X';
+        jugador1[ataquex][ataquey] = '@';
+        t3p2.pop();
+        if (t3p2.length < 1 )
+        {
+          t3p2sink = true;
+        }
+      }
     }
     else
     {
@@ -305,7 +384,14 @@ function startGame(jugador1, jugador2)
       jugador2[ataquex][ataquey] = 'F';
     }
     hackPrintMatriz(jugador2);
-  }while(i < 3);
+
+    if (t1p2sink === true && t2p2sink === true && t3p2sink === true)
+    {
+      t2allsink = true;
+      alert('Player2 GANADOR');
+      break;
+    }
+  }while(t2allsink === false || t1allsink === false);
 }
 
 function main()
