@@ -29,18 +29,18 @@ function hackPrintMatriz(arr)
   {
     for (j = 0; j < arr.length; j ++)
     {
-      // if(arr[i][j] == 1 || arr[i][j] == 2 || arr[i][j] == 3)
-      // {
-      //   matrizAString.push("*");
-      //   matrizAString.push(" ");
-      // }
-      // else
-      // {
-      //   matrizAString.push(arr[i][j]);
-      //   matrizAString.push(" ");
-      // }
-      matrizAString.push(arr[i][j]);
-      matrizAString.push(" ");
+      if(arr[i][j] == 1 || arr[i][j] == 2 || arr[i][j] == 3)
+      {
+        matrizAString.push("*");
+        matrizAString.push(" ");
+      }
+      else
+      {
+        matrizAString.push(arr[i][j]);
+        matrizAString.push(" ");
+      }
+      // matrizAString.push(arr[i][j]);
+      // matrizAString.push(" ");
     }
     matrizAString.push("\n");
   }
